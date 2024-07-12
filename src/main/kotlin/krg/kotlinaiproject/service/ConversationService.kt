@@ -1,4 +1,5 @@
 package krg.kotlinaiproject.service
+import krg.kotlinaiproject.api.res.RedisResponseDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
@@ -17,7 +18,9 @@ class ConversationService @Autowired constructor(
         return redisTemplate.opsForValue().get(archiveKey) as? List<String>
     }
 
-    fun clearConversation() {
+    fun clearConversation() :RedisResponseDTO{
         redisTemplate.delete(archiveKey)
+        return RedisResponseDTO("세션이 초기화되었습니다.")
     }
+
 }

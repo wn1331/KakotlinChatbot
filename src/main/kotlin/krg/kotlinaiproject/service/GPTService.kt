@@ -2,7 +2,6 @@ package krg.kotlinaiproject.service
 
 import krg.kotlinaiproject.api.res.GPTResponseDTO
 import org.springframework.ai.chat.client.ChatClient
-import org.springframework.ai.chat.prompt.Prompt
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -27,8 +26,15 @@ class GPTService(@Autowired val chatClient: ChatClient, val conversationService:
         conversation.add("GPT: $answer")
 
         conversationService.saveConversation(conversation)
-
+        // 세션 제한. 오래된 기록 제거
+        sessionSizeFit(conversation)
         return GPTResponseDTO(answer)
+    }
+
+    private fun sessionSizeFit(conversation: MutableList<String>) {
+        if (conversation.size > 100) {
+            conversation.subList(0, conversation.size - 100).clear()
+        }
     }
 
     suspend fun refactorQuestion(question: List<String>): String{

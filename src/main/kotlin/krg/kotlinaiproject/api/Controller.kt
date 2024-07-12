@@ -2,6 +2,7 @@ package krg.kotlinaiproject.api
 
 import kotlinx.coroutines.reactor.ReactorContext
 import krg.kotlinaiproject.api.res.GPTResponseDTO
+import krg.kotlinaiproject.api.res.RedisResponseDTO
 import krg.kotlinaiproject.service.ConversationService
 import krg.kotlinaiproject.service.GPTService
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,9 +24,12 @@ class Controller(
         @RequestParam(required = true) message: String
     ): GPTResponseDTO {
 
-
-
         coroutineContext[ReactorContext]?.context
         return gptService.doQuestion(message)
+    }
+
+    @GetMapping("/clear")
+    suspend fun clear(): RedisResponseDTO{
+        return conversationService.clearConversation()
     }
 }
