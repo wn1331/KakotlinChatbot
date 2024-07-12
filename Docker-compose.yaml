@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  redis: # container name
+    image: redis:6.2.6-alpine
+    ports: # 바인딩할 포트:내부 포트
+      - ${REDIS_BINDING_PORT}:${REDIS_PORT}
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes: # 마운트할 볼륨 설정
+      - ${REDIS_DATA_PATH}:/data
+      - ${REDIS_DEFAULT_CONFIG_FILE}:/usr/local/etc/redis/redis.conf
+    restart: always
