@@ -30,6 +30,7 @@ class Controller(
 
     @GetMapping("/clear")
     suspend fun clear(): RedisResponseDTO{
+        coroutineContext[ReactorContext]?.context
         return conversationService.clearConversation()
     }
 }

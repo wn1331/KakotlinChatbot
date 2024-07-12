@@ -31,7 +31,7 @@ class GPTService(@Autowired val chatClient: ChatClient, val conversationService:
         return GPTResponseDTO(answer)
     }
 
-    private fun sessionSizeFit(conversation: MutableList<String>) {
+    private suspend fun sessionSizeFit(conversation: MutableList<String>) {
         if (conversation.size > 100) {
             conversation.subList(0, conversation.size - 100).clear()
         }
