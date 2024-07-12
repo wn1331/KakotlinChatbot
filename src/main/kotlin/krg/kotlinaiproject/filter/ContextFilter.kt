@@ -1,4 +1,4 @@
-package krg.kotlinaiproject.config
+package krg.kotlinaiproject.filter
 
 import kotlinx.coroutines.reactive.awaitFirstOrNull
 import kotlinx.coroutines.reactor.mono
