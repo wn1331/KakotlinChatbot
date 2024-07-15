@@ -20,14 +20,15 @@ class Controller(
     val conversationService: ConversationService
 ) {
 
-    @GetMapping("/cor/{roomId}")
+    @GetMapping("/cor/{roomId}/{userId}")
     suspend fun hello(
         @PathVariable roomId: String,
+        @PathVariable userId: String,
         @RequestParam(required = true) message: String
     ): GPTResponseDTO {
 
         coroutineContext[ReactorContext]?.context
-        return gptService.doQuestion(roomId,message)
+        return gptService.doQuestion(roomId, userId, message)
     }
 
     @GetMapping("/clear/{roomId}")

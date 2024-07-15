@@ -8,18 +8,18 @@ import org.springframework.stereotype.Service
 class ConversationService @Autowired constructor(
     private val redisTemplate: RedisTemplate<String, Any>
 ) {
-    private val archiveKey = "chat:archive"
+    private val archiveKey = "room: "
 
     fun saveConversation(roomId:String, conversation: List<String>) {
-        redisTemplate.opsForValue().set(roomId, conversation)
+        redisTemplate.opsForValue().set(archiveKey+roomId, conversation)
     }
 
     fun getConversation(roomId: String): List<String>? {
-        return redisTemplate.opsForValue().get(roomId) as? List<String>
+        return redisTemplate.opsForValue().get(archiveKey+roomId) as? List<String>
     }
 
     fun clearConversation(roomId: String) :RedisResponseDTO{
-        redisTemplate.delete(roomId)
+        redisTemplate.delete(archiveKey+roomId)
         return RedisResponseDTO("세션이 초기화되었습니다.")
     }
 
