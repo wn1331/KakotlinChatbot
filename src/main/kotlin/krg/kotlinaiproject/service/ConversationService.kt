@@ -1,4 +1,5 @@
 package krg.kotlinaiproject.service
+
 import krg.kotlinaiproject.api.res.RedisResponseDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.core.RedisTemplate
