@@ -13,18 +13,15 @@ A web application that leverages a Large Language Model (LLM) (GPT OpenAPI) to p
   - Coroutine
   - Redis
   - Spring AI (OpenAI)
-  - **Redis Vector** (from Spring AI)
 
 ### **Project Features**
 
 1. **IP Filtering:**
    - Restricts access to the application, allowing only requests from the home network IP.
 
-2. **Single Session Memory:**
+2. **Multi Session Memory:**
    - Utilizes Redis to record conversation contexts, enabling the chatbot to remember and respond based on previous interactions.
 
-3. **Enhanced Memory with Redis Vector:**
-   - Uses Redis Vector from Spring AI for more efficient and advanced data handling, enhancing the chatbot's ability to store and retrieve conversation contexts.
 
 ### **Deployment Environment**
 
