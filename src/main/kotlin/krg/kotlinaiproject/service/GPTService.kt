@@ -41,6 +41,6 @@ class GPTService(
     }
 
     suspend fun refactorQuestion(question: List<String>): String {
-        return question.joinToString("\n")
+        return question.joinToString("\n ")
     }
 }
