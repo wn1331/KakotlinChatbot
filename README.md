@@ -1,33 +1,51 @@
-Language : Kotlin
+# Kotlin + Spring Boot Toy Project
 
-Framework : Spring Boot
+## 🌐 **Project Overview**
 
-Skills : Spring Reactive Web(Webflux) + Coroutine + Redis + Spring AI(OpenAI)
+A web application that leverages a Large Language Model (LLM) (GPT OpenAPI) to provide JSON responses. This toy project aims to create a non-blocking, asynchronous KakaoTalk chatbot capable of remembering previous conversation contexts within a single session.
 
-내용 : LLM(GPT Openapi) Json 응답 웹 어플리케이션<토이프로젝트>.
+### **Technologies Used**
 
-특징 : 논블로킹, 비동기, 단일 세션 저장 기능
+- **Language:** Kotlin
+- **Framework:** Spring Boot
+- **Key Skills:**
+  - Spring Reactive Web (Webflux)
+  - Coroutine
+  - Redis
+  - Spring AI (OpenAI)
+  - **Redis Vector** (from Spring AI)
 
-목적 : 대화내용을 기억하고 있는 논블로킹 응답 카톡 챗봇 구현
+### **Project Features**
 
-배포환경 : 홈네트워크 포트포워딩
+1. **IP Filtering:**
+   - Restricts access to the application, allowing only requests from the home network IP.
 
-기능 : 
+2. **Single Session Memory:**
+   - Utilizes Redis to record conversation contexts, enabling the chatbot to remember and respond based on previous interactions.
 
-1. 홈네트워크 이외의 ip 차단(filter)
+3. **Enhanced Memory with Redis Vector:**
+   - Uses Redis Vector from Spring AI for more efficient and advanced data handling, enhancing the chatbot's ability to store and retrieve conversation contexts.
 
-3. 단일세션으로 대화의 내용을 기록하여 응답하는 LLM (Redis 활용)
+### **Deployment Environment**
 
-트러블슈팅: 
+- **Home Network Port Forwarding:**
+  - The application is deployed in a home network setup with port forwarding to manage external access.
 
-1. 필터 적용 안되는문제
-   
-   -> 원인 : webflux + Spring AI 충돌
-   
-   -> Spring AI에 필요한 빈은 Spring-boot-starter-web에 있는 Spring6의 RestClient인데 webflux(spring-boot-starter-webflux)에는 RestClient가 존재하지 않았음.
-   
-   -> spring-boot-starter-web 제거하고 RestClient bean을 임의로 등록하여 해결
+### **Troubleshooting**
 
-추가 구현 해야할 것
+1. **IP Filter Not Applying:**
+   - **Issue:** Conflict between Webflux and Spring AI.
+   - **Root Cause:** Spring AI required beans from `spring-boot-starter-web` which includes Spring 6's `RestClient`, but `spring-boot-starter-webflux` does not have `RestClient`.
+   - **Solution:** Removed `spring-boot-starter-web` and manually registered the `RestClient` bean to resolve the conflict.
 
-1. Android Application(메신저봇 역할)
+### **Future Enhancements**
+
+1. **Android Application:**
+   - Develop an Android application to act as a messenger bot, enhancing accessibility and user experience.
+
+### **Project Purpose**
+
+The primary goal is to implement a non-blocking, asynchronous chatbot for KakaoTalk that retains conversation history, providing a seamless and intelligent user interaction.
+
+
+
