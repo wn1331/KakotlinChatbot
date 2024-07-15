@@ -10,16 +10,16 @@ class ConversationService @Autowired constructor(
 ) {
     private val archiveKey = "chat:archive"
 
-    fun saveConversation(conversation: List<String>) {
-        redisTemplate.opsForValue().set(archiveKey, conversation)
+    fun saveConversation(roomId:String, conversation: List<String>) {
+        redisTemplate.opsForValue().set(roomId, conversation)
     }
 
-    fun getConversation(): List<String>? {
-        return redisTemplate.opsForValue().get(archiveKey) as? List<String>
+    fun getConversation(roomId: String): List<String>? {
+        return redisTemplate.opsForValue().get(roomId) as? List<String>
     }
 
-    fun clearConversation() :RedisResponseDTO{
-        redisTemplate.delete(archiveKey)
+    fun clearConversation(roomId: String) :RedisResponseDTO{
+        redisTemplate.delete(roomId)
         return RedisResponseDTO("세션이 초기화되었습니다.")
     }
 

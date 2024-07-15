@@ -7,6 +7,7 @@ import krg.kotlinaiproject.service.ConversationService
 import krg.kotlinaiproject.service.GPTService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import kotlin.coroutines.coroutineContext
@@ -19,18 +20,19 @@ class Controller(
     val conversationService: ConversationService
 ) {
 
-    @GetMapping("/cor")
+    @GetMapping("/cor/{roomId}")
     suspend fun hello(
+        @PathVariable roomId: String,
         @RequestParam(required = true) message: String
     ): GPTResponseDTO {
 
         coroutineContext[ReactorContext]?.context
-        return gptService.doQuestion(message)
+        return gptService.doQuestion(roomId,message)
     }
 
-    @GetMapping("/clear")
-    suspend fun clear(): RedisResponseDTO{
+    @GetMapping("/clear/{roomId}")
+    suspend fun clear(@PathVariable roomId: String): RedisResponseDTO {
         coroutineContext[ReactorContext]?.context
-        return conversationService.clearConversation()
+        return conversationService.clearConversation(roomId)
     }
 }
