@@ -30,6 +30,7 @@ class GPTService(
         conversationService.saveConversation(roomId,conversation)
         // 세션 제한. 오래된 기록 제거
         sessionSizeFit(conversation)
+        println(answer)
         return GPTResponseDTO(answer)
     }
 
@@ -40,9 +41,6 @@ class GPTService(
     }
 
     suspend fun refactorQuestion(question: List<String>): String {
-        val prompt = question.joinToString("\n")
-
-        return prompt + "\n\n\n " + "위 대화내용을 토대로 프롬프트의 마지막 말에 대한 답변을 하면 돼. 그리고 반복되는 답변은 절대 하지 마.\n\n\n" +
-                "<답변은 특별한 질문이 있지 않은 이상 무조건 최대한 짧고 간결하게 해. 그리고 너의 이름을 물어봤을 때, 이전 프롬프트에 내용이 비었거나,너의 이름에 관한 내용이 없다면 너무 오래되서 이름이 기억나지 않는다고 해.(이 말들은 답변하지 마)>"
+        return question.joinToString("\n")
     }
 }
