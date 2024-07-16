@@ -1,4 +1,4 @@
-# Kotlin + Spring Boot Toy Project
+# KAKAOTALK CHATBOT PROJECT(비동기/논블로킹 대화세션기록 GPT API 구현)
 
 ## 🌐 **Project Overview**
 
@@ -13,18 +13,15 @@ A web application that leverages a Large Language Model (LLM) (GPT OpenAPI) to p
   - Coroutine
   - Redis
   - Spring AI (OpenAI)
-  - **Redis Vector** (from Spring AI)
 
 ### **Project Features**
 
 1. **IP Filtering:**
    - Restricts access to the application, allowing only requests from the home network IP.
 
-2. **Single Session Memory:**
+2. **Multi Session Memory:**
    - Utilizes Redis to record conversation contexts, enabling the chatbot to remember and respond based on previous interactions.
 
-3. **Enhanced Memory with Redis Vector:**
-   - Uses Redis Vector from Spring AI for more efficient and advanced data handling, enhancing the chatbot's ability to store and retrieve conversation contexts.
 
 ### **Deployment Environment**
 
@@ -47,5 +44,10 @@ A web application that leverages a Large Language Model (LLM) (GPT OpenAPI) to p
 
 The primary goal is to implement a non-blocking, asynchronous chatbot for KakaoTalk that retains conversation history, providing a seamless and intelligent user interaction.
 
+### ** 추가 구현해야 할 부분 및 기술적 검토 또는 구상안 **
+1. 일반적인 레디스를 사용하지 않고, 최근 스프링AI에서 발표한 redis-vector를 사용하면 어떨지 (embedding vectordb)
+2. GPT API 말고, 로컬LLM에서 응답받는 방법이 있을지
 
+
+![스크린샷 2024-07-16 오후 12 23 03](https://github.com/user-attachments/assets/b3bbd047-d674-46ab-8724-dbde8278e277)
 

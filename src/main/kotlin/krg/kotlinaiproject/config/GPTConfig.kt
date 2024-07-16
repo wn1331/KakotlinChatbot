@@ -1,9 +1,6 @@
 package krg.kotlinaiproject.config
 
-import io.lettuce.core.SslOptions.Resource
 import org.springframework.ai.chat.client.ChatClient
-import org.springframework.ai.vectorstore.SearchRequest
-import org.springframework.ai.vectorstore.VectorStore
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import java.time.LocalDateTime
