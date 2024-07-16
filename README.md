@@ -1,4 +1,4 @@
-# Kotlin + Spring Boot Toy Project
+# KAKAOTALK CHATBOT PROJECT(비동기/논블로킹 대화세션 저장한 GPT API 구현)
 
 ## 🌐 **Project Overview**
 
@@ -44,5 +44,7 @@ A web application that leverages a Large Language Model (LLM) (GPT OpenAPI) to p
 
 The primary goal is to implement a non-blocking, asynchronous chatbot for KakaoTalk that retains conversation history, providing a seamless and intelligent user interaction.
 
-
+### ** 추가 구현해야 할 부분 및 기술적 검토 또는 구상안 **
+1. 일반적인 레디스를 사용하지 않고, 최근 스프링AI에서 발표한 redis-vector를 사용하면 어떨지 (embedding vectordb)
+2. GPT API 말고, 로컬LLM에서 응답받는 방법이 있을지
 
