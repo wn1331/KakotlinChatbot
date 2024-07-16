@@ -48,3 +48,6 @@ The primary goal is to implement a non-blocking, asynchronous chatbot for KakaoT
 1. 일반적인 레디스를 사용하지 않고, 최근 스프링AI에서 발표한 redis-vector를 사용하면 어떨지 (embedding vectordb)
 2. GPT API 말고, 로컬LLM에서 응답받는 방법이 있을지
 
+
+![스크린샷 2024-07-16 오후 12 23 03](https://github.com/user-attachments/assets/b3bbd047-d674-46ab-8724-dbde8278e277)
+
