@@ -1,3 +1,4 @@
+var count =1;
 function gpt(room, user, msg, callback) {
     const url = "http://222.121.47.141:8080/cor/"+room+"/"+user+"?message="+msg;
     const params = JSON.stringify({
@@ -18,6 +19,32 @@ function gpt(room, user, msg, callback) {
             }
         }
     });
+}
+function simsim(msg){
+    const apiKey = "RKm4diizuJflPLZT-ugFzuTTJWfkj.-as9EmwJPE";
+    const url = "https://wsapi.simsimi.com/190410/talk";
+    const data = JSON.stringify({
+        utext: msg,
+        lang: "ko"
+    });
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("x-api-key", apiKey);
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                console.log('Success:', response);
+            } else {
+                console.error('Error:', xhr.statusText);
+            }
+        }
+    };
+
+    xhr.send(data);
 }
 
 function httpPostRequest(url, params, callback) {
@@ -55,16 +82,43 @@ function httpPostRequest(url, params, callback) {
     }
 }
 
-function response(room, msg, sender, isGroupChat, replier, imageDB, packageName) {
+function responseFix(room, msg, sender, isGroupChat, replier, imageDB, packageName) {
+    count= count+1;
     if (msg.startsWith("@종봇")) {
         let cmd = msg.substr(3);
         gpt(room, sender, cmd, function(result) {
             replier.reply(result);
         });
     }else if(msg.startsWith("[나를 멘션]")){
-        let cmd = msg.substr(7);
+        let cmd = msg.substr(12);
         gpt(room, sender, cmd, function(result) {
             replier.reply(result);
         });
     }
+
+    if(count%100===1){
+        replier.reply("그러게");
+    }
+}
+
+function onNotificationPosted(sbn, sm) {
+    var packageName = sbn.getPackageName();
+    if (!packageName.startsWith("com.kakao.tal")) return;
+    var actions = sbn.getNotification().actions;
+    if (actions == null) return;
+    var act = actions[actions.length - 1];
+    var bundle = sbn.getNotification().extras;
+
+    var msg = bundle.get("android.text").toString();
+    var sender = bundle.getString("android.title");
+    var room = bundle.getString("android.subText");
+    if (room == null) room = bundle.getString("android.summaryText");
+    var isGroupChat = room != null;
+    var replier = new com.xfl.msgbot.script.api.legacy.SessionCacheReplier(packageName, act, room, false, "");
+    var icon = bundle.getParcelable('android.messagingUser').getIcon().getBitmap();
+    var image = bundle.getBundle("android.wearable.EXTENSIONS");
+    if (image != null) image = image.getParcelable("background");
+    var imageDB = new com.xfl.msgbot.script.api.legacy.ImageDB(icon, image);
+    com.xfl.msgbot.application.service.NotificationListener.e.put(room, act);
+    responseFix(room, msg, sender, isGroupChat, replier, imageDB, packageName);
 }

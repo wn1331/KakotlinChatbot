@@ -15,7 +15,12 @@ class ConversationService @Autowired constructor(
     }
 
     fun getConversation(roomId: String): List<String>? {
-        return redisTemplate.opsForValue().get(archiveKey+roomId) as? List<String>
+        val value = redisTemplate.opsForValue().get(archiveKey + roomId)
+        return if (value is List<*>) {
+            value.filterIsInstance<String>()
+        } else {
+            null
+        }
     }
 
     fun clearConversation(roomId: String) :RedisResponseDTO{

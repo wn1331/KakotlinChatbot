@@ -25,7 +25,7 @@ class GPTService(
             .content()
 
         // 방금한 질문의 답변 레디스에 추가
-        conversation.add("GPT: $answer")
+        conversation.add("종봇: $answer")
 
         // 세션 제한. 오래된 기록 제거
         sessionSizeFit(conversation)
@@ -36,8 +36,8 @@ class GPTService(
     }
 
     private suspend fun sessionSizeFit(conversation: MutableList<String>) {
-        if (conversation.size > 100) {
-            conversation.subList(0, conversation.size - 100).clear()
+        if (conversation.size > 200) {
+            conversation.subList(0, conversation.size - 200).clear()
         }
     }
 
