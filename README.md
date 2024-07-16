@@ -1,4 +1,4 @@
-# KAKAOTALK CHATBOT PROJECT(비동기/논블로킹 대화세션 저장한 GPT API 구현)
+# KAKAOTALK CHATBOT PROJECT(비동기/논블로킹 대화세션기록 GPT API 구현)
 
 ## 🌐 **Project Overview**
 
